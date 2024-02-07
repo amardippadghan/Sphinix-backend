@@ -19,10 +19,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Suscription: {
+  hasSubscribe: {
+    type: Boolean,
+    default: false,
+  },
+  licenseId: {
     type: String,
-    required: true,
-    default: "FREEMIUM",
+    default: "",
   },
 });
 
