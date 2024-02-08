@@ -7,7 +7,7 @@ function generateLicense(userId) {
   return hash;
 }
 
-function validateLicense(userId, licenseKey) {  
+function validateLicense(userId, licenseKey) {
   const expectedLicenseKey = generateLicense(userId);
   return licenseKey === expectedLicenseKey;
 }

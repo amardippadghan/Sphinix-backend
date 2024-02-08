@@ -69,6 +69,40 @@ const testSub = async (req, res) => {
   }
 };
 
+const UpdateUser = async (req, res) => {
+  try {
+    const UserId = req.params.id;
+    if (!UserId) {
+      return res.status(400).json(response(null, null, "User not found"));
+    }
+    if (req.body.email) {
+      const userExists = await User.findOne({ email: req.body.email });
+      if (userExists) {
+        return res.status(400).json(response(null, null, "user already exist"));
+      }
+    }
+    const user = await User.findByIdAndUpdate(UserId, req.body, {
+      new: true,
+    });
+    res.status(200).json(response(user, "success", null));
+  } catch (error) {
+    res.status(500).json(response(null, "status : 500", error.message));
+  }
+};
+
+const DeleteUser = async (req, res) => {
+  try {
+    const UserId = req.params.id;
+    if (!UserId) {
+      return res.status(400).json(response(null, null, "User not found"));
+    }
+    const user = await User.findByIdAndDelete(UserId);
+    res.status(200).json(response(user, "success", null));
+  } catch (error) {
+    res.status(500).json(response(null, "status : 500", error.message));
+  }
+};
+
 const getAllUser = async (req, res) => {
   try {
     const users = await User.find();
@@ -79,4 +113,11 @@ const getAllUser = async (req, res) => {
   }
 };
 
-module.exports = { CreateUser, LoginUser, getAllUser ,testSub };
+module.exports = {
+  CreateUser,
+  LoginUser,
+  getAllUser,
+  testSub,
+  DeleteUser,
+  UpdateUser,
+};

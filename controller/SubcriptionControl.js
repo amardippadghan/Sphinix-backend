@@ -1,7 +1,7 @@
 const subscription = require("../models/SubscriptionModel");
 const User = require("../models/UserModel");
 require("dotenv").config();
-const generateLicense = require("../functions/generateLicense");
+const { generateLicense } = require("../functions/generateLicense");
 const response = require("../functions/response");
 
 const UserLicense = async (req, res) => {
