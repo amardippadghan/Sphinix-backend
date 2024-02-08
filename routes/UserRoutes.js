@@ -26,6 +26,6 @@ router.delete("/user/:id", verifyToken, DeleteUser);
 //lisense routes
 router.get("/license", getAllLicense);
 router.post("/license/:userId", UserLicense);
-router.get("/sub/:userId", validate, testSub);
+router.get("/sub/:userId", verifyToken, validate, testSub);
 
 module.exports = router;

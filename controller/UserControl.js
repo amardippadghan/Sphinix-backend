@@ -78,7 +78,17 @@ const UpdateUser = async (req, res) => {
     if (req.body.email) {
       const userExists = await User.findOne({ email: req.body.email });
       if (userExists) {
-        return res.status(400).json(response(null, null, "user already exist"));
+        return res
+          .status(400)
+          .json(response(null, null, "user email already exist"));
+      }
+    }
+    if (req.body.number) {
+      const userNumber = await User.findOne({ number: req.body.number });
+      if (userNumber) {
+        return res
+          .status(400)
+          .json(response(null, null, "user Number already exist"));
       }
     }
     const user = await User.findByIdAndUpdate(UserId, req.body, {
