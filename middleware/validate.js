@@ -15,12 +15,12 @@ const validate = async (req, res, next) => {
   console.log("user", user);
 
   if (!user) {
-   return res
+    return res
       .status(400)
       .json(response(null, "user not found , please signup", "status : 400"));
   }
   if (user.hasSubscribe === false) {
-   return res
+    return res
       .status(400)
       .json(
         response(
@@ -32,6 +32,21 @@ const validate = async (req, res, next) => {
   }
 
   const sub = await subscription.findById(user.licenseId);
+  const enddate = new Date(sub.endDate);
+  const today = new Date();
+  console.log("dateVerify ", enddate < today);
+
+  if (enddate < today) {
+    return res
+      .status(400)
+      .json(
+        response(
+          null,
+          "Subscription Expired , please Renew it ",
+          "status : 400"
+        )
+      );
+  }
   console.log("sub", sub);
 
   const verify = validateLicense(userId, sub.license);
