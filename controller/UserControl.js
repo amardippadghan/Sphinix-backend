@@ -38,6 +38,15 @@ const validateUser = async (req, res) => {
     res.status(500).json(response(null, null, error.message));
   }
 };
+const getUserById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    res.status(200).json(response(user, "success", null));
+  } catch (error) {
+    res.status(500).json(response(null, "status : 500", error.message));
+  }
+};
 
 const LoginUser = async (req, res) => {
   try {
@@ -125,4 +134,5 @@ module.exports = {
   DeleteUser,
   UpdateUser,
   validateUser,
+  getUserById,
 };

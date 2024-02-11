@@ -10,6 +10,7 @@ const {
   validateUser,
   UpdateUser,
   DeleteUser,
+  getUserById,
 } = require("../controller/UserControl");
 
 const {
@@ -24,6 +25,7 @@ router.get("/users", getAllUser);
 router.patch("/user/:id", UpdateUser);
 router.delete("/user/:id", DeleteUser);
 router.get("/verify-token", verifyToken, validateUser);
+router.get("/user/:id", verifyToken, getUserById);
 
 //lisense routes
 router.get("/license", getAllLicense);
