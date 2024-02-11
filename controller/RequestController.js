@@ -14,6 +14,12 @@ const getAllRequests = async (req, res) => {
 const createRequest = async (req, res) => {
   try {
     const { userId, UtrNumber } = req.body;
+    const exist = await Request.findOne({ userId });
+    if (exist) {
+      return res
+        .status(400)
+        .json(response(null, null, "Request already exist"));
+    }
 
     const user = await User.findById(userId);
 

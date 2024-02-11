@@ -3,11 +3,13 @@ const User = require("../models/UserModel");
 require("dotenv").config();
 const { generateLicense } = require("../functions/generateLicense");
 const response = require("../functions/response");
+const RequestModel = require("../models/RequestModel");
 
 const UserLicense = async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(userId);
+
     if (user.hasSubscribe === true) {
       return res
         .status(400)
@@ -32,12 +34,19 @@ const UserLicense = async (req, res) => {
       },
       { new: true }
     );
+    const editRequest = await RequestModel.findOneAndUpdate(
+      { userId },
+      {
+        status: "approve",
+      },
+      { new: true }
+    );
 
     res
       .status(200)
       .json(
         response(
-          { updatedUser: updateUser, subscription: sub },
+          { updatedUser: updateUser, subscription: sub, request: editRequest },
           "success",
           null
         )
