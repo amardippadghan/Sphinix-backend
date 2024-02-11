@@ -31,6 +31,14 @@ const CreateUser = async (req, res) => {
   }
 };
 
+const validateUser = async (req, res) => {
+  try {
+    res.status(200).json(response(null, "token Found , Logging in ", null));
+  } catch (error) {
+    res.status(500).json(response(null, null, error.message));
+  }
+};
+
 const LoginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -46,6 +54,7 @@ const LoginUser = async (req, res) => {
       expiresIn: "3h",
     });
     const sendUser = {
+      id: user._id,
       name: user.name,
       email: user.email,
       number: user.number,
@@ -61,9 +70,7 @@ const LoginUser = async (req, res) => {
 };
 const testSub = async (req, res) => {
   try {
-    res
-      .status(200)
-      .json(response(null, "subcrition is working , success", null));
+    res.status(200).json(response(null, "User has been subscribe", null));
   } catch (error) {
     res.status(500).json(response(null, null, error.message));
   }
@@ -130,4 +137,5 @@ module.exports = {
   testSub,
   DeleteUser,
   UpdateUser,
+  validateUser,
 };

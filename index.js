@@ -7,9 +7,13 @@ app.use(cors());
 app.use(express.json());
 const apiRouter = express.Router();
 
+//routes 
 const UserRoutes = require("./routes/UserRoutes");
+const PostRoutes = require('./routes/RequestRoutes')
+
 
 apiRouter.use("/auth", UserRoutes);
+apiRouter.use("/request", PostRoutes);
 
 app.use("/api", apiRouter);
 
