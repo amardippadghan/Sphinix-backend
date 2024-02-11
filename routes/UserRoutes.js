@@ -21,8 +21,8 @@ const {
 router.post("/signup", CreateUser);
 router.post("/login", LoginUser);
 router.get("/users", getAllUser);
-router.patch("/user/:id", verifyToken, UpdateUser);
-router.delete("/user/:id", verifyToken, DeleteUser);
+router.patch("/user/:id", UpdateUser);
+router.delete("/user/:id", DeleteUser);
 router.get("/verify-token", verifyToken, validateUser);
 
 //lisense routes

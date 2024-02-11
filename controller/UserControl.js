@@ -79,28 +79,15 @@ const testSub = async (req, res) => {
 const UpdateUser = async (req, res) => {
   try {
     const UserId = req.params.id;
+    console.log("edit userid ", UserId);
     if (!UserId) {
       return res.status(400).json(response(null, null, "User not found"));
     }
-    if (req.body.email) {
-      const userExists = await User.findOne({ email: req.body.email });
-      if (userExists) {
-        return res
-          .status(400)
-          .json(response(null, null, "user email already exist"));
-      }
-    }
-    if (req.body.number) {
-      const userNumber = await User.findOne({ number: req.body.number });
-      if (userNumber) {
-        return res
-          .status(400)
-          .json(response(null, null, "user Number already exist"));
-      }
-    }
+
     const user = await User.findByIdAndUpdate(UserId, req.body, {
       new: true,
     });
+    console.log("updated user", user);
     res.status(200).json(response(user, "success", null));
   } catch (error) {
     res.status(500).json(response(null, "status : 500", error.message));
