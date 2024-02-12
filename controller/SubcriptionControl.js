@@ -56,6 +56,17 @@ const UserLicense = async (req, res) => {
     res.status(500).json(response(null, "status : 500", error.message));
   }
 };
+const getByIdLisense = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const license = await subscription.findById(id);
+    res.status(200).json(response(license, "success", null));
+  } catch (error) {
+    res.status(500).json(response(null, "status : 500", error.message));
+    console.log(error);
+    return;
+  }
+};
 
 const getAllLicense = async (req, res) => {
   try {
@@ -65,4 +76,4 @@ const getAllLicense = async (req, res) => {
     res.status(500).json(response(null, "status : 500 ", error.message));
   }
 };
-module.exports = { UserLicense, getAllLicense };
+module.exports = { UserLicense, getAllLicense, getByIdLisense };
