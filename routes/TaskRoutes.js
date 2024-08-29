@@ -6,7 +6,7 @@ const {CreateTask , getTask , updateTask , deleteTask} = require("../controller/
 
 
 router.post("/createTask",verifyToken,CreateTask)
-router.get("/getTask", getTask)
+router.get("/getTask",verifyToken, getTask)
 router.patch("/updateTask", verifyToken, updateTask)
 router.delete("/deleteTask", verifyToken, deleteTask)
 
