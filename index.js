@@ -11,10 +11,12 @@ const apiRouter = express.Router();
 const UserRoutes = require("./routes/UserRoutes");
 const PostRoutes = require("./routes/RequestRoutes");
 const AdminRoutes = require("./routes/AdminRoutes");
+const TaskRoutes = require("./routes/TaskRoutes");
 
 apiRouter.use("/auth", UserRoutes);
 apiRouter.use("/request", PostRoutes);
 apiRouter.use("/admin", AdminRoutes);
+apiRouter.use("/task", TaskRoutes);
 
 app.use("/api", apiRouter);
 

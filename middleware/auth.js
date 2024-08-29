@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
         .status(401)
         .json(response(null, null, "forbidden :Token not found"));
     }
-    const user = jwt.verify(token, process.env.JWT_TOKEN);
+    const user = jwt.verify(token, process.env.JWT_TOKEN);  
     req.user = user;
     console.log(req.user);
     next();

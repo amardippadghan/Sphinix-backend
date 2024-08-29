@@ -8,14 +8,15 @@ require("dotenv").config();
 const register = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const admin = await Admin.create({ username, password: hashedPassword });   
+    
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const admin = await Admin.create({ username, password: hashedPassword });
     res.status(201).json(response(admin, "Admin has been created", null));
   } catch (error) {
     res.status(500).json(response(null, null, error.message));
   }
 };
+
 const getAdmin = async (req, res) => {
   try {
     const admin = await Admin.find();
